@@ -1,6 +1,5 @@
 package com.ga.DroneCoordinatesGenerator.model;
 
-import com.ga.DroneCoordinatesGenerator.model.classes.Coordinate;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,8 +29,11 @@ public class History {
     @Column
     private Integer numberOfDrones;
 
-    @Column
-    private List<Coordinate> coordinates;
+    @Embedded
+    private Coordinate coordinate;
+
+    @OneToMany(mappedBy = "history", fetch = FetchType.EAGER)
+    private List<DroneHistory> droneHistories;
 
     @CreationTimestamp
     @Column
