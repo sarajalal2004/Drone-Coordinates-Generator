@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,6 +24,17 @@ public class Drone {
 
     @Column
     private String serial;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
+    @ManyToOne
+    @JoinColumn(name = "renter_id")
+    private User renter;
+
+    @OneToMany(mappedBy = "drone", fetch = FetchType.EAGER)
+    private List<DroneHistory> droneHistories;
 
     @CreationTimestamp
     @Column

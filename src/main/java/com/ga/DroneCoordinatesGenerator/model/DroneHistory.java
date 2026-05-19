@@ -22,6 +22,14 @@ public class DroneHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "drone_id")
+    private Drone drone;
+
+    @ManyToOne
+    @JoinColumn(name = "history_id")
+    private History history;
+
     @CreationTimestamp
     @Column
     private LocalDateTime createdAt;

@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -50,6 +51,16 @@ public class User {
 
     @Column
     private Boolean verified;
+
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    private List<Drone> ownedDrone;
+
+    @OneToMany(mappedBy = "renter", fetch = FetchType.EAGER)
+    private List<Drone> rentedDrone;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "profile_id")
+    private UserProfile userProfile;
 
     @CreationTimestamp
     @Column

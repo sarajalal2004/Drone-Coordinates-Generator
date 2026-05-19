@@ -44,6 +44,10 @@ public class UserProfile {
     @JsonIgnore
     private String profileImageURL;
 
+    @OneToOne(mappedBy = "userProfile", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private User user;
+
     @CreationTimestamp
     @Column
     private LocalDateTime createdAt;
