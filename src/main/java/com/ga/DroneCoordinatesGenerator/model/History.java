@@ -29,11 +29,12 @@ public class History {
     @Column
     private Integer numberOfDrones;
 
-    @Embedded
-    private Coordinate coordinate;
-
     @OneToMany(mappedBy = "history", fetch = FetchType.EAGER)
     private List<DroneHistory> droneHistories;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @CreationTimestamp
     @Column

@@ -30,6 +30,9 @@ public class DroneHistory {
     @JoinColumn(name = "history_id")
     private History history;
 
+    @Embedded
+    private Coordinate coordinate;
+
     @CreationTimestamp
     @Column
     private LocalDateTime createdAt;

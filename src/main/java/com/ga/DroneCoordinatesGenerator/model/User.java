@@ -59,6 +59,9 @@ public class User {
     @OneToMany(mappedBy = "renter", fetch = FetchType.EAGER)
     private List<Drone> rentedDrone;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<History> histories;
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "profile_id")
     private UserProfile userProfile;

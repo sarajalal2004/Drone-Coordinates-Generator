@@ -53,12 +53,16 @@ public class DroneService {
         return droneRepository.save(drone);
     }
 
+
     public Drone updateDrone(Long droneId, Drone drone){
         Drone droneObj = droneRepository.findById(droneId).orElseThrow(
-                () -> new InformationNotFoundException("No drone with Id " + droneId + " exists")
+                    () -> new InformationNotFoundException("No drone with Id " + droneId + " exists")
         );
-        if(droneRepository.existsBySerial(drone.getSerial()) && droneRepository.findBySerial(drone.getSerial()).get().getId() != droneId)
-        droneObj.setSerial(drone.getSerial());
+        if(! getCurrentLoggedInUser().getRole().equals(User.Role.ADMIN) && !getCurrentLoggedInUser().equals(droneObj.getOwner()))
+            throw new AccessDeniedException("Only Admin or drone owner could update it");
+        if(droneRepository.existsBySerial(drone.getSerial()) && droneRepository.findBySerial(drone.getSerial()).get().getId() != droneId) {
+            droneObj.setSerial(drone.getSerial());
+        }
         return droneRepository.save(droneObj);
     }
 
@@ -66,6 +70,8 @@ public class DroneService {
         Drone droneObj = droneRepository.findById(droneId).orElseThrow(
                 () -> new InformationNotFoundException("No drone with Id " + droneId + " exists")
         );
+        if(! getCurrentLoggedInUser().getRole().equals(User.Role.ADMIN) && !getCurrentLoggedInUser().equals(droneObj.getOwner()))
+            throw new AccessDeniedException("Only Admin or drone owner could update it");
         droneObj.setStatus(Drone.DroneStatus.INACTIVE);
         return droneRepository.save(droneObj);
     }
