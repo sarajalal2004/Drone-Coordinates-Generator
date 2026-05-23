@@ -29,6 +29,15 @@ public class Drone {
     @JoinColumn(name = "owner_id")
     private User owner;
 
+    public enum DroneStatus{
+        ACTIVE,
+        INACTIVE
+    }
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private DroneStatus status;
+
     @ManyToOne
     @JoinColumn(name = "renter_id")
     private User renter;
