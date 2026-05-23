@@ -31,6 +31,7 @@ public class User {
     private String password;
 
     public enum Role{
+        GUEST,
         OWNER,
         RENTER,
         ADMIN
