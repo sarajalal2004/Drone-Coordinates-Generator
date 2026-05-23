@@ -32,12 +32,14 @@ import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Service
 public class UserService {
     @Value("${spring.mail.username}")
     private String fromMail;
@@ -59,6 +61,8 @@ public class UserService {
                        JWTUtils jwtUtils,
                        @Lazy AuthenticationManager authenticationManager,
                        @Lazy MyUserDetails myUserDetails,
+                       EmailVerificationTokenRepository emailVerificationTokenRepository,
+                       PasswordResetTokenRepository passwordResetTokenRepository,
                        @Lazy CloudinaryService cloudinaryService,
                        UserProfileRepository userProfileRepository,
                        @Lazy JavaMailSender mailSender){
@@ -67,6 +71,8 @@ public class UserService {
         this.jwtUtils = jwtUtils;
         this.authenticationManager = authenticationManager;
         this.myUserDetails = myUserDetails;
+        this.emailVerificationTokenRepository = emailVerificationTokenRepository;
+        this.passwordResetTokenRepository = passwordResetTokenRepository;
         this.cloudinaryService = cloudinaryService;
         this.userProfileRepository = userProfileRepository;
         this.mailSender = mailSender;
@@ -76,7 +82,7 @@ public class UserService {
         if(!userRepository.existsByEmail(user.getEmail())){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setStatus(User.Status.ACTIVE);
-            user.setRole(User.Role.GUEST);
+            user.setRole(User.Role.USER);
             user.setVerified(false);
             userRepository.save(user);
 
