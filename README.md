@@ -103,8 +103,8 @@ Fill with your passwords and keys
 <tr><td>GET</td><td>/api/drones/{droneId}</td><td>Private</td><td>ALL</td></tr>
 <tr><td>POST</td><td>/api/drones</td><td>Private</td><td>All</td></tr>
 <tr><td>PUT</td><td>/api/drones/{droneId}</td><td>Private</td><td>OWNER / ADMIN</td></tr>
-<tr><td>DELETE</td><td>/api/drones/{droneId}</td><td>Private</td><td>ADMIN</td></tr>
-<tr><td>PUT</td><td>/api/drones/rent</td><td>Private</td><td>ALL</td></tr>
+<tr><td>DELETE</td><td>/api/drones/{droneId}</td><td>Private</td><td>OWNER / ADMIN</td></tr>
+<tr><td>PUT</td><td>/api/drones/rent</td><td>Private</td><td>OWNER / ADMIN</td></tr>
 
 <!-- ================= DRONE IMAGE PROCESSOR ================= -->
 <tr><td colspan="4" align="center"><strong>🖼️ Drone Image Processor Endpoints</strong></td></tr>
