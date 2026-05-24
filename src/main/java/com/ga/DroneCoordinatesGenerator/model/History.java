@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -29,8 +30,11 @@ public class History {
     @Column
     private Integer numberOfDrones;
 
-    @OneToMany(mappedBy = "history", fetch = FetchType.EAGER)
-    private List<DroneHistory> droneHistories;
+    @Column
+    private Double width;
+
+    @OneToMany(mappedBy = "history", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DroneHistory> droneHistories = new ArrayList<>();;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

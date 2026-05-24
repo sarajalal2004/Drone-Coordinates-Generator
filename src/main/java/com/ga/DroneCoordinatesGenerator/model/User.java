@@ -53,13 +53,16 @@ public class User {
     @Column
     private Boolean verified;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Drone> ownedDrone;
 
-    @OneToMany(mappedBy = "renter", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "renter",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Drone> rentedDrone;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<History> histories;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

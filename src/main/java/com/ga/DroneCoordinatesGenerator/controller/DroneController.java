@@ -45,6 +45,7 @@ public class DroneController {
         return droneService.deleteDrone(droneId);
     }
 
+    // problem
     @PutMapping(path = "/rent")
     public ResponseEntity rentDrone(@RequestBody RentDroneRequest rentDroneRequest){
         return droneService.rentDrone(rentDroneRequest);
