@@ -112,7 +112,7 @@ Fill with your passwords and keys
 
 <!-- ================= HISTORY ================= -->
 <tr><td colspan="4" align="center"><strong>📜 History Endpoints</strong></td></tr>
-<tr><td>GET</td><td>/api/histories</td><td>Private</td><td>ALL</td></tr>
+<tr><td>GET</td><td>/api/histories</td><td>Private</td><td>ADMIN - ALL History<br/>ALL - Ony self intiated</td></tr>
 <tr><td>GET</td><td>/api/histories/{historyId}</td><td>Private</td><td>ALL</td></tr>
 <tr><td>DELETE</td><td>/api/histories/{historyId}</td><td>Private</td><td>ADMIN</td></tr>
 
