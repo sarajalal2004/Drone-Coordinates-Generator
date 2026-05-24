@@ -34,7 +34,7 @@ public class JWTUtils {
 
     public boolean validateJwtToken(String token){
         try{
-            Jwts.parserBuilder().setSigningKey(jwtSecret).build().parseClaimsJwt(token);
+            Jwts.parserBuilder().setSigningKey(jwtSecret).build().parseClaimsJws(token);
             return true;
         } catch (SecurityException | MalformedJwtException e) {
             logger.log(Level.SEVERE, "Invalid JWT signature: {0}", e.getMessage());

@@ -1,5 +1,6 @@
 package com.ga.DroneCoordinatesGenerator.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class DroneHistory {
     private Drone drone;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "history_id")
     private History history;
 

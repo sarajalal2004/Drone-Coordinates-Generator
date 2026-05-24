@@ -49,6 +49,7 @@ public class DroneService {
         drone.setOwner(user);
         if(user.getRole().equals(User.Role.USER) || user.getRole().equals(User.Role.RENTER)){
             drone.getOwner().setRole(User.Role.OWNER);
+            userRepository.save(user);
         }
         return droneRepository.save(drone);
     }
@@ -58,11 +59,12 @@ public class DroneService {
         Drone droneObj = droneRepository.findById(droneId).orElseThrow(
                     () -> new InformationNotFoundException("No drone with Id " + droneId + " exists")
         );
-        if(! getCurrentLoggedInUser().getRole().equals(User.Role.ADMIN) && !getCurrentLoggedInUser().equals(droneObj.getOwner()))
+        if(!(getCurrentLoggedInUser().getRole().equals(User.Role.ADMIN)) && !(getCurrentLoggedInUser().getId().equals(droneObj.getOwner().getId())))
             throw new AccessDeniedException("Only Admin or drone owner could update it");
         if(droneRepository.existsBySerial(drone.getSerial()) && droneRepository.findBySerial(drone.getSerial()).get().getId() != droneId) {
-            droneObj.setSerial(drone.getSerial());
+            throw  new AccessDeniedException("Serial is already used by other item");
         }
+        droneObj.setSerial(drone.getSerial());
         return droneRepository.save(droneObj);
     }
 
@@ -70,7 +72,7 @@ public class DroneService {
         Drone droneObj = droneRepository.findById(droneId).orElseThrow(
                 () -> new InformationNotFoundException("No drone with Id " + droneId + " exists")
         );
-        if(! getCurrentLoggedInUser().getRole().equals(User.Role.ADMIN) && !getCurrentLoggedInUser().equals(droneObj.getOwner()))
+        if(! getCurrentLoggedInUser().getRole().equals(User.Role.ADMIN) && !getCurrentLoggedInUser().getId().equals(droneObj.getOwner().getId()))
             throw new AccessDeniedException("Only Admin or drone owner could update it");
         droneObj.setStatus(Drone.DroneStatus.INACTIVE);
         return droneRepository.save(droneObj);
@@ -80,7 +82,7 @@ public class DroneService {
         Drone drone = droneRepository.findById(rentDroneRequest.getDroneId()).orElseThrow(
                 () -> new InformationNotFoundException("No drone with Id " + rentDroneRequest.getDroneId() + " exists")
         );
-        if(!drone.getOwner().equals(getCurrentLoggedInUser()) && !getCurrentLoggedInUser().getRole().equals(User.Role.ADMIN))
+        if(!drone.getOwner().getId().equals(getCurrentLoggedInUser().getId()) && !getCurrentLoggedInUser().getRole().equals(User.Role.ADMIN))
             throw new AccessDeniedException("Only drone owner or admin allowed to assign it for rent");
         User rentUser = userRepository.findById(rentDroneRequest.getRenterUserId()).orElseThrow(
                 () -> new InformationNotFoundException("No user with Id " + rentDroneRequest.getRenterUserId() + " exists")
@@ -90,6 +92,7 @@ public class DroneService {
             throw new BadRequestException("Rented User is already an owner for this drone");
         if(rentUser.getRole().equals(User.Role.USER)){
             drone.getRenter().setRole(User.Role.RENTER);
+            userRepository.save(rentUser);
         }
         droneRepository.save(drone);
         return ResponseEntity.ok("Drone " + drone.getSerial() + "  have been rented to " + rentUser.getUserProfile().getFirstName() + " " + rentUser.getUserProfile().getLastName() + " successfully");

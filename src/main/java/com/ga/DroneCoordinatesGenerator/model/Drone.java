@@ -1,5 +1,6 @@
 package com.ga.DroneCoordinatesGenerator.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,6 +44,7 @@ public class Drone {
     private User renter;
 
     @OneToMany(mappedBy = "drone", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<DroneHistory> droneHistories;
 
     @CreationTimestamp
