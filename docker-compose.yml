@@ -6,8 +6,11 @@ services:
       - 8080:8080
     depends_on:
       - postgres_db
-    links:
-      - postgres_db:database
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/Drone
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: nE5kMc7JCGNqwDQM
     networks:
       - postgres
 
@@ -17,7 +20,8 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_DB: java_to_dev_app_db
+      POSTGRES_DB: Drone
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: nE5kMc7JCGNqwDQM
     volumes:
       - postgres:/data/postgres
@@ -33,7 +37,7 @@ services:
     volumes:
       - pgadmin:/root/.pgadmin
     ports:
-      - "${PGADMIN_PORT:-5050}:80"
+      - "${PGADMIN_PORT:-5051}:80"
     networks:
       - postgres
 

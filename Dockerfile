@@ -16,4 +16,4 @@ RUN mkdir -p /app/logs/
 ADD target/DroneCoordinatesGenerator-0.0.1-SNAPSHOT.jar /app/app.jar
 
 # run the .jar file with the active profile dev
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=dev", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-jar", "/app/app.jar"]
