@@ -28,7 +28,9 @@ These attributes are evaluated and combined into a priority score, which determi
 
 ## 🚧 Challenges & Unsolved Problems
 
-One of the main challenges to get the best points for an image and utilize all the drones specified quantity.
+- The main challenges to get the best points for an image and utilize all the drones specified quantity.
+- Handle the main rules in the drone system
+
 
 ---
 
