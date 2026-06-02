@@ -1,5 +1,5 @@
 # 👥 User Stories
-The main user stories
+The main user stories showing the system functionlities
 
 ## 👤 User Authentication & Profile
 
