@@ -1,6 +1,6 @@
 --
 -- PostgreSQL database dump
---Sample Usernames and passwords
+--   Sample Usernames and passwords
 --         Username              |        password         |     Role
 --   saraalkhozaae@gmail.com     |    SecurePassword123!   |    OWNER
 
