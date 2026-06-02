@@ -33,6 +33,7 @@ One of the main challenges to get the best points for an image and utilize all t
 ---
 
 ## 👥 User Stories
+The following doc includes main userstories to clerify functionalities
 
 [User Stories](https://github.com/sarajalal2004/Drone-Coordinates-Generator/blob/main/UserStories.md)
 
