@@ -77,6 +77,7 @@ Fill with your passwords and keys
 ---
 
 ## 🌐 API Endpoints
+the following endpoints for the main system APIs
 
 <table>
   <tr>
